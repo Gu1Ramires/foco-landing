@@ -1,0 +1,79 @@
+/* ---------- Barra global (topo) ---------- */
+.global-nav {
+  position: relative;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.global-nav-inner { height: 48px; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: 0.04em; font-size: 0.95rem; }
+.brand-dot { width: 12px; height: 12px; border-radius: 50%; border: 3px solid var(--gold); }
+
+.global-links { display: flex; gap: 32px; font-size: 0.8rem; }
+.global-links a { color: rgba(245, 245, 247, 0.8); transition: color var(--dur-fast); position: relative; }
+.global-links a:hover, .global-links a.active { color: var(--text); }
+.global-links a.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: var(--gold);
+}
+
+.burger { display: none; width: 32px; height: 32px; position: relative; }
+.burger span { position: absolute; left: 7px; right: 7px; height: 1.5px; background: var(--text); transition: transform var(--dur-med) var(--ease-out); }
+.burger span:first-child { top: 12px; }
+.burger span:last-child { top: 19px; }
+.burger.is-open span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.burger.is-open span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+@media (max-width: 720px) {
+  .burger { display: block; }
+  /* Menu mobile: desce a partir do topo (transição "panel reveal") */
+  .global-links {
+    position: absolute; top: 48px; left: 0; right: 0;
+    flex-direction: column; gap: 0; padding: 8px 24px 24px;
+    background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px);
+    font-size: 1.6rem; font-weight: 600;
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.45s var(--ease-out);
+  }
+  .global-links a { padding: 10px 0; opacity: 0; transform: translateY(-8px); transition: opacity 0.3s, transform 0.3s var(--ease-out); }
+  .global-links.is-open { clip-path: inset(0 0 0 0); }
+  .global-links.is-open a { opacity: 1; transform: none; }
+  .global-links.is-open a:nth-child(2) { transition-delay: 40ms; }
+  .global-links.is-open a:nth-child(3) { transition-delay: 80ms; }
+  .global-links.is-open a:nth-child(4) { transition-delay: 120ms; }
+  .global-links.is-open a:nth-child(5) { transition-delay: 160ms; }
+  .global-links a.active::after { display: none; }
+}
+
+/* ---------- Pílula flutuante (anexo 2) ---------- */
+.local-bar {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  z-index: 60;
+  width: min(820px, calc(100% - 24px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 20px;
+  border-radius: 16px;
+  background: rgba(22, 22, 23, 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+.local-bar strong { letter-spacing: 0.04em; }
+.local-bar-actions { display: flex; gap: 8px; }
+
+/* ---------- Rodapé ---------- */
+.footer { background: var(--surface); color: var(--muted); font-size: 0.8rem; padding: 40px 0 28px; margin-top: 0; }
+.footer-note { padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.footer-grid div { display: grid; gap: 8px; align-content: start; }
+.footer-grid h4 { color: var(--text); font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; }
+.footer-grid a:hover { color: var(--text); text-decoration: underline; }
+.footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding-top: 18px; }
+
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; }
+}
