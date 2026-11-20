@@ -1,0 +1,136 @@
+/* ---------- Telas Entrar e Criar conta ---------- */
+.auth {
+  position: relative;
+  min-height: calc(100svh - 48px);
+  display: grid;
+  place-items: center;
+  padding: 64px 20px 96px;
+  overflow: hidden;
+}
+.auth-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--blue) 22%, transparent), transparent 55%),
+    radial-gradient(circle at 85% 90%, color-mix(in srgb, var(--purple) 14%, transparent), transparent 50%);
+}
+.auth-card {
+  position: relative;
+  width: min(440px, 100%);
+  background: rgba(29, 29, 31, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px 32px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+}
+.auth-card.is-wide { width: min(520px, 100%); }
+.auth-brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: 0.04em; font-size: 0.9rem; margin-bottom: 20px; }
+.auth-title { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.035em; line-height: 1.1; }
+.auth-subtitle { color: var(--muted); margin-top: 6px; font-size: 0.95rem; }
+.auth-subtitle .auth-inline-link { font-size: inherit; }
+
+.auth-form { display: grid; gap: 16px; margin-top: 28px; }
+.auth-field { display: grid; gap: 8px; }
+.auth-field label { font-size: 0.85rem; font-weight: 600; }
+.auth-field input, .auth-pass input {
+  width: 100%;
+  font: inherit; color: var(--text);
+  background: #000; border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.auth-field input:focus, .auth-pass input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); }
+.auth-field input[aria-invalid='true'], .auth-pass input[aria-invalid='true'] { border-color: #e5484d; }
+
+.auth-pass { position: relative; }
+.auth-pass input { padding-right: 48px; }
+.auth-eye {
+  position: absolute; right: 6px; top: 50%; translate: 0 -50%;
+  width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+  color: var(--muted); transition: color var(--dur-fast), background var(--dur-fast);
+}
+.auth-eye:hover { color: var(--text); background: rgba(255, 255, 255, 0.06); }
+.auth-eye svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+.auth-hint { color: var(--muted); font-size: 0.78rem; line-height: 1.45; }
+.auth-error { color: #ff8a8a; font-size: 0.82rem; font-weight: 500; }
+.auth-note { color: var(--muted); font-size: 0.8rem; background: rgba(255, 255, 255, 0.05); border-radius: 10px; padding: 10px 12px; }
+
+.auth-strength { display: flex; align-items: center; gap: 10px; }
+.auth-strength-bar { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.auth-strength-bar span { height: 4px; border-radius: 4px; background: rgba(255, 255, 255, 0.1); transition: background var(--dur-med); }
+.auth-strength-bar[data-level='1'] span.on { background: #e5484d; }
+.auth-strength-bar[data-level='2'] span.on { background: var(--cyan); }
+.auth-strength-bar[data-level='3'] span.on { background: var(--blue); }
+.auth-strength-bar[data-level='4'] span.on { background: var(--green); }
+.auth-strength small { font-size: 0.75rem; color: var(--muted); min-width: 64px; text-align: right; }
+
+.auth-rules { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 0.76rem; color: var(--muted); }
+.auth-rules li { transition: color var(--dur-fast); }
+.auth-rules li span { display: inline-block; width: 12px; }
+.auth-rules li.ok { color: var(--green); }
+
+.auth-terms { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; color: rgba(245, 245, 247, 0.85); }
+.auth-terms input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--blue); flex-shrink: 0; cursor: pointer; }
+.auth-inline-link { color: var(--blue); text-decoration: underline; text-align: left; font-size: inherit; }
+
+.auth-submit { justify-content: center; padding: 13px 20px; font-size: 1rem; margin-top: 4px; }
+
+.auth-links { display: grid; gap: 8px; font-size: 0.85rem; }
+.auth-links a, .auth-switch a { color: var(--blue); }
+.auth-links a:hover, .auth-switch a:hover { text-decoration: underline; }
+.auth-switch { font-size: 0.9rem; padding-top: 16px; border-top: 1px solid var(--line); }
+.auth-back { color: var(--muted); font-size: 0.85rem; }
+.auth-back:hover { color: var(--text); }
+
+.auth-success { display: grid; gap: 14px; margin-top: 20px; justify-items: start; }
+.auth-success-ic { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--green) 18%, transparent); color: var(--green); font-size: 1.5rem; font-weight: 700; }
+.auth-success p { color: rgba(245, 245, 247, 0.85); }
+
+.auth-field textarea {
+  width: 100%; resize: vertical; min-height: 120px;
+  font: inherit; color: var(--text); background: #000; border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+}
+.auth-field textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 4px color-mix(in srgb, var(--blue) 18%, transparent); }
+.auth-field textarea[aria-invalid='true'] { border-color: #e5484d; }
+.auth-field input::placeholder, .auth-field textarea::placeholder { color: #5f5f66; }
+.auth-counter { justify-self: end; font-size: 0.72rem; color: var(--muted); margin-top: -4px; font-variant-numeric: tabular-nums; }
+
+.auth-code { letter-spacing: 0.4em; font-size: 1.2rem !important; font-variant-numeric: tabular-nums; text-align: center; }
+.auth-check { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; cursor: pointer; width: fit-content; }
+.auth-check input { width: 18px; height: 18px; accent-color: var(--blue); cursor: pointer; }
+.auth-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.auth-row .btn { padding: 12px 20px; font-variant-numeric: tabular-nums; }
+
+.auth-fieldset { border: 1px solid var(--line); border-radius: var(--radius-md); padding: 18px 18px 6px; display: grid; gap: 14px; background: rgba(0, 0, 0, 0.25); }
+.auth-fieldset legend { padding: 0 8px; margin-left: -8px; font-weight: 600; font-size: 0.95rem; }
+
+.auth-success-title { font-size: 1.15rem; font-weight: 600; color: var(--text) !important; }
+
+@media (max-width: 480px) {
+  .auth-card { padding: 28px 20px 24px; }
+  .auth-rules { grid-template-columns: 1fr; }
+}
+
+/* ---------- Termo (modal e página) ---------- */
+.termo-modal { padding: 28px 28px 20px; display: grid; gap: 16px; }
+.termo-modal h2 { font-size: 1.3rem; letter-spacing: -0.02em; padding-right: 40px; }
+.termo-scroll { max-height: min(60vh, 520px); overflow-y: auto; padding-right: 12px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 12px; }
+.termo-actions { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.termo-actions small { color: var(--muted); }
+.termo-actions div { display: flex; gap: 8px; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+
+.termo-page { max-width: 820px; padding-bottom: 120px; }
+.termo-text { color: rgba(245, 245, 247, 0.82); font-size: 0.92rem; line-height: 1.65; }
+.termo-text h3 { color: var(--text); font-size: 1.1rem; margin: 28px 0 8px; letter-spacing: 0.02em; }
+.termo-text h3:first-of-type { margin-top: 8px; }
+.termo-text h4 { color: var(--text); font-size: 0.98rem; margin: 20px 0 6px; }
+.termo-text p { margin-bottom: 10px; }
+.termo-text .termo-version { color: var(--muted); font-size: 0.82rem; }
+.termo-text ul { padding-left: 20px; margin-bottom: 10px; }
+.termo-text li p { margin-bottom: 4px; }
+.termo-text table { width: 100%; border-collapse: collapse; margin: 12px 0 16px; font-size: 0.82rem; }
+.termo-text th, .termo-text td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+.termo-text th { background: rgba(255, 255, 255, 0.05); color: var(--text); }
+.termo-text td p, .termo-text th p { margin: 0; }

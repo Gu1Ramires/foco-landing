@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import PageHeader from '../components/layout/PageHeader'
 import { highlights, type Highlight } from '../data/content'
-import { DashboardVisual, FocosVisual, LabVisual, StarVisual, Top3Visual, TimerVisual } from '../components/ui/Visuals'
+import { ObservarVisual, FocosVisual, LabVisual, StarVisual, Top3Visual, TimerVisual } from '../components/ui/Visuals'
 import '../components/layout/pages.css'
 
 /**
@@ -14,7 +14,7 @@ const visuals: Record<Highlight['visual'], () => React.ReactNode> = {
   estrela: () => <StarVisual />,
   timer: () => <TimerVisual size={200} />,
   lab: () => <LabVisual />,
-  dashboard: () => <DashboardVisual />,
+  observar: () => <ObservarVisual />,
 }
 
 export default function Funcionalidades() {

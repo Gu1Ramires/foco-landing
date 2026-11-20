@@ -10,16 +10,16 @@ import './home.css'
  * existe, aparece o timer animado (contando de verdade).
  */
 const extras = [
-  { title: 'Pausar e retomar.', text: 'A sessão continua de onde parou, sem perder o tempo já estudado.' },
-  { title: 'Histórico automático.', text: 'Cada sessão vai direto para o Foco certo e alimenta o Dashboard.' },
-  { title: 'No navegador.', text: 'Funciona no computador e no celular, sem instalar nada.' },
+  { title: 'Janela flutuante.', text: 'O timer fica por cima dos outros programas enquanto você lê, assiste à aula ou anota.' },
+  { title: 'Sem "concluir antes".', text: 'A sessão só termina quando o tempo que você escolheu acaba. Pausar pode; o tempo pausado não conta.' },
+  { title: 'O que você aprendeu?', text: 'No fim, um registro curto e privado da sessão, e as horas somam no seu Foco.' },
 ]
 
 export default function VideoSection() {
   return (
     <section className="video-sec">
       <div className="container">
-        <p className="eyebrow center">Timer de foco</p>
+        <p className="eyebrow center">Concentrar</p>
         <BlurText as="h2" className="section-title center" text="Concentração. Do primeiro ao último minuto." />
 
         <Reveal className="screen">
@@ -38,8 +38,9 @@ export default function VideoSection() {
 
         <Reveal>
           <p className="lead center video-text">
-            Escolha um Foco, aperte o play e <span className="grad-2">estude sem distração</span>. O F.O.C.O cuida do resto:
-            <span className="grad-3"> registra a sessão, soma o tempo e mostra a evolução</span> no seu Dashboard.
+            Escolha um Foco, defina de <strong>5 a 180 minutos</strong> e comece. Durante a sessão, o app fica
+            <span className="grad-2"> bloqueado só no timer</span>, e um alerta sonoro avisa o fim. Depois,
+            <span className="grad-3"> as horas somam no Foco e aparecem no Observar</span>.
           </p>
         </Reveal>
 

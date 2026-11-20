@@ -8,15 +8,20 @@
 }
 .global-nav-inner { height: 48px; display: flex; align-items: center; justify-content: space-between; }
 .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; letter-spacing: 0.04em; font-size: 0.95rem; }
-.brand-dot { width: 12px; height: 12px; border-radius: 50%; border: 3px solid var(--gold); }
+.brand-dot { width: 18px; height: 18px; display: block; }
 
 .global-links { display: flex; gap: 32px; font-size: 0.8rem; }
 .global-links a { color: rgba(245, 245, 247, 0.8); transition: color var(--dur-fast); position: relative; }
 .global-links a:hover, .global-links a.active { color: var(--text); }
 .global-links a.active::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: var(--gold);
+  content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: var(--blue);
 }
 
+.global-nav-inner { gap: 24px; }
+.global-links { margin-left: auto; }
+.global-actions { display: flex; align-items: center; gap: 14px; }
+.global-enter { font-size: 0.8rem; color: rgba(245, 245, 247, 0.85); }
+.global-enter:hover { color: var(--text); }
 .burger { display: none; width: 32px; height: 32px; position: relative; }
 .burger span { position: absolute; left: 7px; right: 7px; height: 1.5px; background: var(--text); transition: transform var(--dur-med) var(--ease-out); }
 .burger span:first-child { top: 12px; }
@@ -26,6 +31,8 @@
 
 @media (max-width: 720px) {
   .burger { display: block; }
+  .global-actions { margin-left: auto; }
+  .global-enter { display: none; }
   /* Menu mobile: desce a partir do topo (transição "panel reveal") */
   .global-links {
     position: absolute; top: 48px; left: 0; right: 0;

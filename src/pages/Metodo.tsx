@@ -1,18 +1,22 @@
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import PageHeader from '../components/layout/PageHeader'
 import Reveal from '../components/fx/Reveal'
-import { pillars } from '../data/content'
+import { appLinks, pillars } from '../data/content'
 import '../components/layout/pages.css'
 
-/** Página 2 — o método F.O.C.O: os 4 pilares e a base em metacognição. */
+/** Página 2 — o método F.O.C.O: os 4 pilares, a metacognição e a confirmação reflexiva. */
+
+const FRASE = 'EU ESCOLHO MUDAR MINHA PRIORIDADE'
+
 export default function Metodo() {
   return (
     <>
       <PageHeader
         eyebrow="O método"
         title="Quatro pilares. Um jeito de estudar."
-        text="F.O.C.O é a sigla de Filtrar, Organizar, Concentrar e Observar. Cada pilar vira uma parte do sistema, e juntos eles formam um ciclo que você repete toda semana."
+        text="F.O.C.O é a sigla de Filtrar, Organizar, Concentrar e Observar. Você filtra o que importa, organiza a pilha de prioridades, se concentra em uma sessão de cada vez e observa o que mudou."
       />
 
       <section className="container method-cycle">
@@ -45,22 +49,70 @@ export default function Metodo() {
         </Reveal>
         <Reveal delay={0.1}>
           <p className="lead">
-            Pesquisas em psicologia cognitiva mostram que quem <strong>planeja, monitora e avalia</strong> o próprio estudo aprende melhor.
-            O F.O.C.O transforma esse ciclo em ações simples: escolher prioridades (planejar), registrar sessões (monitorar) e olhar o Dashboard (avaliar).
+            Flavell (1979) chama de metacognição o conhecimento que temos sobre os nossos próprios processos de pensamento.
+            E Kahneman (2012) mostra que decisões como trocar de prioridade ou desistir costumam ser tomadas <strong>no impulso</strong>.
+            Por isso, o F.O.C.O foi desenhado para levar você ao <strong>pensamento deliberado</strong> justamente nesses momentos.
           </p>
         </Reveal>
       </section>
 
+      <ReflexiveDemo />
+
       <section className="container callout">
         <Reveal>
-          <h2 className="split-title">Não punitivo, por princípio.</h2>
+          <h2 className="split-title">Incentivo, não punição.</h2>
           <p className="lead">
-            Muitos apps de estudo punem dias parados com sequências que zeram e alertas de culpa. O F.O.C.O faz o contrário:
-            <strong> nada se perde quando você para</strong>, e voltar é sempre o próximo passo natural.
+            Nada de ícones vermelhos ou avisos de "não concluído". Um Foco que ficou parado vai para o
+            <strong> Laboratório de Sonhos</strong> com todas as horas e o histórico preservados. Para voltar, é só
+            resgatar e fazer uma sessão: o retorno é demonstrado na prática, não só declarado.
           </p>
-          <Link to="/funcionalidades" className="link-arrow" style={{ marginTop: 20 }}>Ver as funcionalidades →</Link>
+          <Link to={appLinks.criarConta} className="btn btn-primary" style={{ marginTop: 24 }}>Criar conta</Link>
         </Reveal>
       </section>
     </>
+  )
+}
+
+/**
+ * Demonstração da confirmação reflexiva (RF14): para tirar a Estrela, o
+ * sistema pede que você digite a frase. Como no sistema real, o campo só
+ * aceita letras, mostra em maiúsculas, não aceita colar e ignora espaços extras.
+ */
+function ReflexiveDemo() {
+  const [text, setText] = useState('')
+  const [done, setDone] = useState(false)
+  const normalized = text.trim().replace(/\s+/g, ' ').toUpperCase()
+  const ok = normalized === FRASE
+
+  return (
+    <section className="container reflex">
+      <Reveal className="reflex-box">
+        <div>
+          <p className="eyebrow">Confirmação reflexiva</p>
+          <h2 className="split-title">Decisões importantes pedem uma pausa.</h2>
+          <p className="lead">
+            Tirar a Estrela Dourada de um Foco não é um clique. Primeiro o F.O.C.O lembra que aquele Foco já foi a sua prioridade.
+            Se você seguir, precisa digitar uma frase. A pequena fricção faz você <strong>pensar antes de decidir</strong>.
+          </p>
+        </div>
+
+        <div className="reflex-demo">
+          <p className="reflex-label">Experimente. Digite:</p>
+          <p className="reflex-phrase">{FRASE}</p>
+          <input
+            value={text}
+            onChange={(e) => { setDone(false); setText(e.target.value.replace(/[^a-zA-Z ]/g, '').replace(/ {2,}/g, ' ').slice(0, FRASE.length + 2)) }}
+            onPaste={(e) => e.preventDefault()}
+            placeholder="Digite a frase acima"
+            aria-label="Frase de confirmação"
+            style={{ textTransform: 'uppercase' }}
+          />
+          <button className="btn btn-danger" disabled={!ok} onClick={() => setDone(true)}>
+            Remover a Estrela
+          </button>
+          {done && <motion.p className="reflex-ok" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}>Pronto. No sistema, o Foco desceria para a 4ª posição e a Estrela ficaria livre.</motion.p>}
+        </div>
+      </Reveal>
+    </section>
   )
 }

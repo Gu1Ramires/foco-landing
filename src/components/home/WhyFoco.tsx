@@ -10,10 +10,11 @@ import './home.css'
  * Título curto e grande, parágrafo com palavras-chave em gradiente,
  * três números animados e os cards de Foco abrindo em leque.
  */
+// Leque com a pilha real: Estrela no meio, 2ª e 3ª posições nas laterais
 const fan = [
-  { name: 'Inglês para TI', tag: 'Idiomas', progress: 45, color: '#b48cff', rotate: -10, x: -150 },
-  { name: 'React + TypeScript', tag: 'Programação', progress: 72, color: '#f5b83d', rotate: 0, x: 0, star: true },
-  { name: 'Banco de Dados', tag: 'Faculdade', progress: 30, color: '#5fd4a4', rotate: 10, x: 150 },
+  { name: 'Inglês para TI', hours: 31, goal: 168, color: '#a77bff', rotate: -10, x: -150 },
+  { name: 'React + TypeScript', hours: 52, goal: 168, color: '#f5b83d', rotate: 0, x: 0, star: true },
+  { name: 'Banco de Dados', hours: 9, goal: 168, color: '#3ecf8e', rotate: 10, x: 150 },
 ]
 
 export default function WhyFoco() {
@@ -28,8 +29,8 @@ export default function WhyFoco() {
             O F.O.C.O é uma <strong>plataforma de gestão de estudos</strong> para quem quer aprender muita coisa e acaba não avançando em nenhuma.
             Baseado em <span className="grad-1">psicologia cognitiva e metacognição</span>, ele ajuda você a
             <span className="grad-2"> escolher o que estudar agora</span>, registrar cada sessão e
-            <span className="grad-3"> enxergar o próprio progresso</span>. Sem sequências que quebram, sem culpa:
-            <strong> recomeçar faz parte do método.</strong>
+            <span className="grad-3"> enxergar o próprio progresso</span>. Sem ícones vermelhos nem avisos de "não concluído":
+            <strong> um Foco deixado de lado vai para o Laboratório de Sonhos, com todas as horas guardadas.</strong>
           </p>
         </Reveal>
 
@@ -37,8 +38,8 @@ export default function WhyFoco() {
 
         <div className="why-stats">
           <div><small>Método com</small><strong><CountUp to={4} /> pilares</strong><small>Filtrar, Organizar, Concentrar, Observar</small></div>
-          <div><small>Destaque para</small><strong><CountUp to={1} /> Foco principal</strong><small>com a Estrela Dourada</small></div>
-          <div><small>Design com</small><strong><CountUp to={0} from={9} /> punições</strong><small>por dias sem estudar</small></div>
+          <div><small>Destaque para</small><strong><CountUp to={3} /> Focos</strong><small>no Top 3 da sua pilha</small></div>
+          <div><small>Liberada com</small><strong><CountUp to={10} /> h de estudo</strong><small>a Estrela só vai para quem tem constância</small></div>
         </div>
 
         <div className="why-fan">

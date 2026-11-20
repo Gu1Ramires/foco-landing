@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { highlights, type Highlight } from '../../data/content'
-import { DashboardVisual, FocosVisual, LabVisual, StarVisual, Top3Visual, TimerVisual } from '../ui/Visuals'
+import { ObservarVisual, FocosVisual, LabVisual, StarVisual, Top3Visual, TimerVisual } from '../ui/Visuals'
 import Modal from '../ui/Modal'
 import VideoFrame from '../ui/VideoFrame'
 import './home.css'
@@ -21,12 +21,14 @@ const visuals: Record<Highlight['visual'], () => React.ReactNode> = {
   estrela: () => <StarVisual />,
   timer: () => <TimerVisual />,
   lab: () => <LabVisual />,
-  dashboard: () => <DashboardVisual />,
+  observar: () => <ObservarVisual />,
 }
 
 export default function Highlights() {
   const [index, setIndex] = useState(0)
-  const [playing, setPlaying] = useState(true)
+  // Com "reduzir movimento" ligado, o carrossel começa pausado (RN31.2)
+  const reduce = useReducedMotion()
+  const [playing, setPlaying] = useState(!reduce)
   const [videoOpen, setVideoOpen] = useState(false)
   const dragStart = useRef<number | null>(null)
 

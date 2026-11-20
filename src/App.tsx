@@ -1,13 +1,18 @@
 import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, MotionConfig, motion } from 'motion/react'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import Home from './pages/Home'
 import Metodo from './pages/Metodo'
 import Funcionalidades from './pages/Funcionalidades'
 import Sobre from './pages/Sobre'
-import Beta from './pages/Beta'
+import Comecar from './pages/Comecar'
+import Entrar from './pages/Entrar'
+import CriarConta from './pages/CriarConta'
+import Termo from './pages/Termo'
+import RecuperarSenha from './pages/RecuperarSenha'
+import NaoConsigoAcessar from './pages/NaoConsigoAcessar'
 
 /**
  * App — monta o layout (Header + página + Footer) e as 5 rotas.
@@ -21,7 +26,9 @@ export default function App() {
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior }) }, [location.pathname])
 
   return (
-    <>
+    // reducedMotion="user": se o sistema pedir menos movimento, o motion
+    // desliga as animações de posição/escala (RNF11 e RN31.2)
+    <MotionConfig reducedMotion="user">
       <Header />
       <AnimatePresence mode="wait">
         <motion.main
@@ -36,12 +43,17 @@ export default function App() {
             <Route path="/metodo" element={<Metodo />} />
             <Route path="/funcionalidades" element={<Funcionalidades />} />
             <Route path="/sobre" element={<Sobre />} />
-            <Route path="/beta" element={<Beta />} />
+            <Route path="/comecar" element={<Comecar />} />
+            <Route path="/entrar" element={<Entrar />} />
+            <Route path="/criar-conta" element={<CriarConta />} />
+            <Route path="/termo" element={<Termo />} />
+            <Route path="/recuperar-senha" element={<RecuperarSenha />} />
+            <Route path="/nao-consigo-acessar" element={<NaoConsigoAcessar />} />
             <Route path="*" element={<Home />} />
           </Routes>
         </motion.main>
       </AnimatePresence>
       <Footer />
-    </>
+    </MotionConfig>
   )
 }

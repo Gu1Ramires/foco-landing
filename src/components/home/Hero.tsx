@@ -1,8 +1,8 @@
-import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useCallback, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import TrueFocus from '../fx/TrueFocus'
-import { pillars } from '../../data/content'
+import { appLinks, pillars } from '../../data/content'
 import './home.css'
 
 /**
@@ -28,20 +28,6 @@ export default function Hero() {
           onChange={handleChange}
         />
 
-        {/* card flutuando na frente das letras (faz o papel do iPhone) */}
-        <motion.div
-          className="hero-float"
-          initial={{ opacity: 0, y: 60, rotateX: 25 }}
-          animate={{ opacity: 1, y: [0, -10, 0], rotateX: 12 }}
-          transition={{ opacity: { duration: 1, delay: 0.4 }, rotateX: { duration: 1, delay: 0.4 }, y: { duration: 6, repeat: Infinity, ease: 'easeInOut' } }}
-        >
-          <span className="hero-float-star">★</span>
-          <div>
-            <small>Estrela Dourada</small>
-            <strong>React + TypeScript</strong>
-          </div>
-          <span className="hero-float-time">07:18</span>
-        </motion.div>
         <div className="hero-word" aria-live="polite">
           <AnimatePresence mode="wait">
             <motion.span
@@ -67,10 +53,10 @@ export default function Hero() {
 
         <motion.div className="hero-cta" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.8 }}>
           <span>
-            <strong>Grátis no beta</strong>
+            <strong>Comece agora</strong>
             <small>Plataforma de gestão de estudos</small>
           </span>
-          <Link to="/beta" className="btn btn-gold">Entrar no beta</Link>
+          <Link to={appLinks.criarConta} className="btn btn-primary">Criar conta</Link>
         </motion.div>
       </div>
     </section>

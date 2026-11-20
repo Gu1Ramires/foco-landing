@@ -1,9 +1,9 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import CountUp from '../fx/CountUp'
 import Reveal from '../fx/Reveal'
-import { compareFeatures, compareOptions, type CompareId } from '../../data/content'
+import { appLinks, compareFeatures, compareOptions, type CompareId } from '../../data/content'
 import './home.css'
 
 /**
@@ -63,10 +63,10 @@ export default function Compare() {
 
       <div className="container final-cta">
         <h2 className="section-title center">Pronto para focar?</h2>
-        <p className="lead center">Entre no beta e use o F.O.C.O de graça enquanto ele cresce.</p>
+        <p className="lead center">Crie sua conta grátis e cadastre o seu primeiro Foco.</p>
         <div className="final-actions">
-          <Link to="/beta" className="btn btn-gold">Entrar no beta</Link>
-          <Link to="/metodo" className="btn btn-ghost">Conhecer o método</Link>
+          <Link to={appLinks.criarConta} className="btn btn-primary">Criar conta</Link>
+          <Link to={appLinks.entrar} className="btn btn-ghost">Já tenho conta</Link>
         </div>
       </div>
     </section>

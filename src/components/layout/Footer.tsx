@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
-import { navLinks, tcc } from '../../data/content'
+import { appLinks, navLinks, tcc } from '../../data/content'
 import './layout.css'
 
-/** Rodapé com links das 5 páginas, GitHub e créditos do TCC (anexo 8). */
+/** Rodapé: páginas, conta, Termo de Uso (RN31.3) e créditos do TCC. */
 export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
         <p className="footer-note">
-          F.O.C.O é um Projeto Final de Curso de {tcc.curso} — {tcc.universidade}. Funcionalidades em versão beta podem mudar antes do lançamento.
+          F.O.C.O é um Projeto Final de Curso de {tcc.curso} — {tcc.universidade}. Protótipo acadêmico: algumas funcionalidades ainda estão em desenvolvimento.
         </p>
 
         <div className="footer-grid">
@@ -17,10 +17,10 @@ export default function Footer() {
             {navLinks.map((l) => <Link key={l.to} to={l.to}>{l.label}</Link>)}
           </div>
           <div>
-            <h4>O projeto</h4>
-            <a href={tcc.github} target="_blank" rel="noreferrer">GitHub</a>
-            <Link to="/sobre">Monografia e stack</Link>
-            <Link to="/beta">Lista do beta</Link>
+            <h4>Conta</h4>
+            <Link to={appLinks.entrar}>Entrar</Link>
+            <Link to={appLinks.criarConta}>Criar conta</Link>
+            <Link to={appLinks.termo}>Termo de Uso e Política de Privacidade</Link>
           </div>
           <div>
             <h4>Créditos do TCC</h4>

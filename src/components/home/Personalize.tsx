@@ -2,33 +2,42 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { AppPreview } from '../ui/Visuals'
 import Reveal from '../fx/Reveal'
+import { palette } from '../../data/content'
 import './home.css'
 
 /**
  * Anexo 4 — Seletor que muda a prévia em tempo real.
  * Igual aos botões "Cores / Em dois tamanhos..." da Apple: você clica numa
- * pílula, ela se abre com a explicação e a janela do app à direita reage.
+ * pílula, ela se abre com a explicação e a pilha de Focos à direita reage.
+ * Tudo aqui segue as regras do Organizar (RF10 a RF15).
  */
 const options = [
-  { id: 'tema', label: 'Tema claro ou escuro', text: 'Estude de dia ou de madrugada. O painel acompanha você.' },
-  { id: 'cores', label: 'Cores dos Focos', text: 'Cada Foco tem a sua cor, para você reconhecer de longe.' },
-  { id: 'top3', label: 'Top 3', text: 'Só três Focos em destaque. O resto espera sem pesar.' },
-  { id: 'estrela', label: 'Estrela Dourada', text: 'O Foco principal fica marcado e travado por 10 horas.' },
-  { id: 'lab', label: 'Laboratório de Sonhos', text: 'As ideias que não cabem agora ficam guardadas aqui.' },
+  { id: 'cores', label: 'Cores dos Focos', text: 'Escolha a cor de cada Foco. Ela aparece enquanto ele estiver no Top 3.' },
+  { id: 'top3', label: 'Top 3', text: 'As três primeiras posições ganham destaque. Do 4º Foco em diante, cor neutra.' },
+  { id: 'estrela', label: 'Estrela Dourada', text: 'A prioridade máxima fica fixa no topo, em dourado. Só um Foco do Top 3 com 10 h ou mais de estudo pode recebê-la.' },
+  { id: 'posicao', label: 'Mudar posição', text: 'Você decide a ordem da pilha escolhendo a nova posição de cada Foco. O 1º lugar fica reservado à Estrela.' },
+  { id: 'lab', label: 'Laboratório de Sonhos', text: 'Arquive um Foco que ficou para depois. As horas e o histórico continuam guardados.' },
 ]
 
-const swatches = ['#f5b83d', '#7aa2ff', '#b48cff', '#5fd4a4', '#ff7a7a']
+// Cores da paleta da plataforma (RN12.1). Sem dourado (RN12.3) e sem
+// laranja/vermelho (RN12.5).
+const swatches = [
+  { name: 'Azul', value: palette.azul },
+  { name: 'Roxo', value: palette.roxo },
+  { name: 'Verde', value: palette.verde },
+  { name: 'Ciano', value: palette.ciano },
+  { name: 'Rosa', value: palette.rosa },
+]
 
 export default function Personalize() {
-  const [open, setOpen] = useState('tema')
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
-  const [accent, setAccent] = useState(swatches[0])
+  const [open, setOpen] = useState('cores')
+  const [accent, setAccent] = useState(palette.roxo)
 
   return (
     <section className="personalize">
       <div className="container">
-        <p className="eyebrow">Personalização</p>
-        <h2 className="section-title">Seu painel.<br />Do seu jeito.</h2>
+        <p className="eyebrow">Organizar</p>
+        <h2 className="section-title">Sua pilha.<br />Suas prioridades.</h2>
 
         <Reveal className="pz-box">
           <ul className="pz-list">
@@ -45,19 +54,10 @@ export default function Personalize() {
                     {isOpen && (
                       <motion.div className="pz-body" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>
                         <p>{o.text}</p>
-                        {o.id === 'tema' && (
-                          <div className="pz-seg" role="radiogroup">
-                            {(['dark', 'light'] as const).map((t) => (
-                              <button key={t} className={theme === t ? 'on' : ''} onClick={() => setTheme(t)} role="radio" aria-checked={theme === t}>
-                                {t === 'dark' ? 'Escuro' : 'Claro'}
-                              </button>
-                            ))}
-                          </div>
-                        )}
                         {o.id === 'cores' && (
                           <div className="pz-swatches">
                             {swatches.map((c) => (
-                              <button key={c} style={{ background: c }} className={accent === c ? 'on' : ''} onClick={() => setAccent(c)} aria-label={`Cor ${c}`} />
+                              <button key={c.value} style={{ background: c.value }} className={accent === c.value ? 'on' : ''} onClick={() => setAccent(c.value)} aria-label={c.name} title={c.name} />
                             ))}
                           </div>
                         )}
@@ -70,7 +70,7 @@ export default function Personalize() {
           </ul>
 
           <div className="pz-preview">
-            <AppPreview theme={theme} accent={accent} focus={open} />
+            <AppPreview accent={accent} focus={open} />
           </div>
         </Reveal>
       </div>

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'motion/react'
-import { navLinks } from '../../data/content'
+import { appLinks, navLinks } from '../../data/content'
 import './layout.css'
 
 /**
  * Header com duas barras, igual à página da Apple:
  * 1) GlobalNav — fina, no topo, com os links das 5 páginas.
- * 2) LocalBar — a "pílula" flutuante "F.O.C.O · Explorar · Entrar no beta",
+ * 2) LocalBar — a "pílula" flutuante "F.O.C.O · Entrar · Criar conta",
  *    que só aparece depois que você rola a página (fundo desfocado).
  */
 export default function Header() {
@@ -31,7 +31,7 @@ export default function Header() {
       <header className="global-nav">
         <div className="container global-nav-inner">
           <Link to="/" className="brand" aria-label="F.O.C.O — início">
-            <span className="brand-dot" /> F.O.C.O
+            <img src="/brand-ring.png" alt="" className="brand-dot" /> F.O.C.O
           </Link>
 
           <nav className={`global-links ${open ? 'is-open' : ''}`} aria-label="Principal">
@@ -41,6 +41,12 @@ export default function Header() {
               </NavLink>
             ))}
           </nav>
+
+          {/* RF31: botões "Entrar" e "Criar conta" sempre visíveis */}
+          <div className="global-actions">
+            <Link to={appLinks.entrar} className="global-enter">Entrar</Link>
+            <Link to={appLinks.criarConta} className="btn btn-primary btn-sm">Criar conta</Link>
+          </div>
 
           <button
             className={`burger ${open ? 'is-open' : ''}`}
@@ -64,8 +70,8 @@ export default function Header() {
           >
             <strong>F.O.C.O</strong>
             <div className="local-bar-actions">
-              <Link to="/funcionalidades" className="btn btn-ghost btn-sm">Explorar</Link>
-              <Link to="/beta" className="btn btn-gold btn-sm">Entrar no beta</Link>
+              <Link to={appLinks.entrar} className="btn btn-ghost btn-sm">Entrar</Link>
+              <Link to={appLinks.criarConta} className="btn btn-primary btn-sm">Criar conta</Link>
             </div>
           </motion.div>
         )}

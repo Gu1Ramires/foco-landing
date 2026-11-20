@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import './fx.css'
 
 /**
@@ -19,16 +19,18 @@ type Props = {
 export default function TrueFocus({ letters, interval = 1800, onChange, colors = [] }: Props) {
   const [active, setActive] = useState(0)
   const [paused, setPaused] = useState(false)
+  // "Reduzir movimento" ligado: a letra só muda com o mouse (RN31.2)
+  const reduce = useReducedMotion()
   const wrapRef = useRef<HTMLDivElement>(null)
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([])
   const [frame, setFrame] = useState({ x: 0, y: 0, width: 0, height: 0 })
 
   // 1) Troca a letra ativa num intervalo (para quando o mouse está em cima)
   useEffect(() => {
-    if (paused) return
+    if (paused || reduce) return
     const id = setInterval(() => setActive((i) => (i + 1) % letters.length), interval)
     return () => clearInterval(id)
-  }, [paused, interval, letters.length])
+  }, [paused, reduce, interval, letters.length])
 
   useEffect(() => onChange?.(active), [active, onChange])
 
